@@ -30,5 +30,6 @@
   "description": "This package gives you dither shader material",
   "repository": "https://github.com/TheoDerive/three-dither-shader",
   "author": "TheoDerive <theo.derive.pro@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": ["threejs", "dither", "shader", "dithering"]
 }
