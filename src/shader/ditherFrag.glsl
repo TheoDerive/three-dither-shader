@@ -37,10 +37,9 @@ float dither4x4(vec2 position, float brightness) {
 }
 
 void main(){
- float CENTER = 1.0 / float(numberOfLights);
+  float CENTER = 1.0 / float(numberOfLights);
 
   vec3 light = vec3(0);
-
 
   for ( int i = 0; i < numberOfLights; i++ ){
 
@@ -60,15 +59,15 @@ void main(){
   vec3 lightDirection = normalize(lightDelta);
 
 
-float shading = dot(vNormal, lightDirection) * 0.5 + 0.5;
-shading = max(shading, 0.0);
+  float shading = dot(vNormal, lightDirection) * 0.5 + 0.5;
+  shading = max(shading, 0.0);
 
 
   float decay = 1.0 - lightDistance * decayIntencity;
   light += vec3(.8, .3, .8) * lightIntencity * shading * decay;
   }
 
-light = clamp(light, 0.0, 1.0); 
+  light = clamp(light, 0.0, 1.0); 
 
   float grey = dot(light.rgb, vec3(0.299, 0.587, 0.114));
 
