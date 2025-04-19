@@ -1,7 +1,7 @@
 {
   "name": "three-dither-shader",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,6 +19,7 @@
     "clean": "rm -rf clean"
   },
   "devDependencies": {
+    "typedoc": "^0.28.2",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
     "vite-plugin-glsl": "^1.4.0"
@@ -31,5 +32,10 @@
   "repository": "https://github.com/TheoDerive/three-dither-shader",
   "author": "TheoDerive <theo.derive.pro@gmail.com>",
   "license": "MIT",
-  "keywords": ["threejs", "dither", "shader", "dithering"]
+  "keywords": [
+    "threejs",
+    "dither",
+    "shader",
+    "dithering"
+  ]
 }

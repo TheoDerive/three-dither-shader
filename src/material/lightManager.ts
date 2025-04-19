@@ -17,6 +17,14 @@ export class LightManager {
 
   private static materials: Set<THREE.ShaderMaterial> = new Set()
 
+
+  /**
+  * Create a new light
+  *
+  * @param { array } position - Light position: [ x, y, z ]
+  * @param { number } intensity - Light intencity
+  *
+  */
   static addLight(position: [number, number, number], intensity: number) {
     if (this.lightCount >= this.maxLights) {
       console.warn("Max number of lights reached");
@@ -50,6 +58,15 @@ export class LightManager {
     mat.uniforms.numberOfLights.value = this.lightCount
   }
 
+
+  /**
+  * Upadate light values
+  *
+  * @param { number } index - Light index / id
+  * @param { array } position - Light position: [ x, y, z ]
+  * @param { number } intensity - Light intencity
+  *
+  */
   static updateLight(index: number, position: [number, number, number], intensity: number) {
     const base = index * 4;
 
@@ -72,6 +89,12 @@ export class LightManager {
     return this.pixelRatio
   }
 
+  /**
+  * Upadate light pixelRatio
+  *
+  * @param { number } value - New pixelRatio value
+  *
+  */
   static setPixelRatio(value: number){
     this.pixelRatio = value
 

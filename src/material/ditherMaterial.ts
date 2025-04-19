@@ -4,18 +4,12 @@ import frag from "../shader/ditherFrag.glsl?raw"
 import vert from "../shader/ditherVert.glsl?raw"
 import { LightManager } from './lightManager';
 
-type getMaterialType = {
-  width: number
-  height: number
-  isSphere?: boolean
-}
-
 export class DitherMaterial {
   private material: THREE.ShaderMaterial
   private decay: number
 
-  constructor(decay?: number) {
-    this.decay = decay || .4
+  constructor() {
+    this.decay = .4
 
     this.material = new THREE.ShaderMaterial({
       uniforms: {
@@ -32,7 +26,15 @@ export class DitherMaterial {
     LightManager.registerMaterial(this.material)
   }
 
-  getMaterial({ width, height, isSphere }: getMaterialType){
+  /**
+  * Get shader material with mesh dimention required
+  *
+  * @param { number } width - Width of the mesh
+  * @param { number } height - Height of the mesh
+  * @param { boolean } isSphere - Act diferently if it's a sphere
+  *
+  */
+  getMaterial(width: number, height: number, isSphere?: boolean){
 
     const newMeshDimention = new THREE.Vector2(width, height)
 
@@ -46,6 +48,13 @@ export class DitherMaterial {
     return this.material
   }
 
+
+  /**
+  * Set new decay value for a specific light
+  *
+  * @param { number } value - decay value
+  *
+  */
   public setDecay(value: number){
     this.decay = value
 
