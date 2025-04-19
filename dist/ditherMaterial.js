@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import frag from "../shader/ditherFrag.glsl?raw";
 import { LightManager } from './lightManager';
 
 const vert = `
@@ -133,7 +132,7 @@ export class DitherMaterial {
         });
         LightManager.registerMaterial(this.material);
     }
-    getMaterial({ width, height, isSphere }) {
+    getMaterial( width, height, isSphere ) {
         const newMeshDimention = new THREE.Vector2(width, height);
         if (isSphere) {
             newMeshDimention.x *= 2;
