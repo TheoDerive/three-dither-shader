@@ -1,0 +1,34 @@
+{
+  "name": "three-dither-shader",
+  "private": false,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf clean"
+  },
+  "devDependencies": {
+    "typescript": "~5.7.2",
+    "vite": "^6.2.0",
+    "vite-plugin-glsl": "^1.4.0"
+  },
+  "peerDependencies": {
+    "@types/three": "^0.175.0",
+    "three": "^0.175.0"
+  },
+  "description": "This package gives you dither shader material",
+  "repository": "https://github.com/TheoDerive/three-dither-shader",
+  "author": "TheoDerive <theo.derive.pro@gmail.com>",
+  "license": "MIT"
+}
