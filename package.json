@@ -16,5 +16,13 @@
     "@types/three": "^0.175.0",
     "lil-gui": "^0.20.0",
     "three": "^0.175.0"
-  }
+  },
+  "peerDependencies": {
+    "@types/three": "^0.175.0",
+    "three": "^0.175.0"
+  },
+  "description": "This package gives you dither shader material",
+  "repository": "https://github.com/TheoDerive/three-dither-shader",
+  "author": "TheoDerive <theo.derive.pro@gmail.com>",
+  "license": "MIT"
 }
