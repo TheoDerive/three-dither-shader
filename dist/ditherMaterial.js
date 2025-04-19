@@ -14,9 +14,6 @@ void main(){
 
   vec4 modelNormal = modelMatrix * vec4(normal, 1.0);
 
-  float scaleX = length(vec3(modelMatrix[0].xyz));
-  float scaleY = length(vec3(modelMatrix[1].xyz));
-
   vUv = vec2(uv.x * meshDimention.x, uv.y * meshDimention.y);
   vPosition = modelPosition.xyz;
   vNormal = modelNormal.xyz;
