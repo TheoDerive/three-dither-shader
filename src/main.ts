@@ -27,17 +27,17 @@ LightManager.setPixelRatio(200)
 
 const cube = new THREE.Mesh(
   new THREE.BoxGeometry(2, 5, 2),
-  ditherCube.getMaterial({ width: 2, height: 5 })
+  ditherCube.getMaterial(2, 5)
 )
 
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(),
-  ditherSphere.getMaterial({ width: 1, height: 1, isSphere: true })
+  ditherSphere.getMaterial(1, 1, true)
 )
 
 const plane = new THREE.Mesh(
   new THREE.PlaneGeometry(1, 7),
-  ditherPlane.getMaterial({ width: 1, height: 7 })
+  ditherPlane.getMaterial(1, 7 )
 )
 
 sphere.position.x += 3
@@ -55,12 +55,14 @@ clock.start()
 function animate() {
   const elapsedTime = clock.getElapsedTime()
   controls.update();
+
+  cube.position.y = Math.sin(elapsedTime)
   
-  LightManager.updateLight(0, [
-    Math.sin(elapsedTime) * 4,
-    1,
-    1
-  ], 1)
+  // LightManager.updateLight(0, [
+  //   Math.sin(elapsedTime) * 4,
+  //   1,
+  //   1
+  // ], 1)
 
   renderer.render(scene, camera);
 }
