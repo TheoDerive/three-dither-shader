@@ -8,11 +8,11 @@ void main(){
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
   vec4 projectedPosition = projectionMatrix * viewMatrix *  modelPosition;
 
-  vec4 modelNormal = modelMatrix * vec4(normal, 1.0);
+  mat3 modelNormal = transpose(inverse(mat3(modelMatrix)));
 
   vUv = vec2(uv.x * meshDimention.x, uv.y * meshDimention.y);
   vPosition = modelPosition.xyz;
-  vNormal = modelNormal.xyz;
+  vNormal = normalize(modelNormal * normal);
 
   gl_Position = projectedPosition;
 }
