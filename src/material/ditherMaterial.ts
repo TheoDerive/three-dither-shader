@@ -39,8 +39,8 @@ export class DitherMaterial {
     const newMeshDimention = new THREE.Vector2(width, height)
 
     if(isSphere){
-      newMeshDimention.x *= 2
-      newMeshDimention.y *= 2
+      newMeshDimention.x *= 2.5
+      newMeshDimention.y *= 2.5
     }
 
     this.material.uniforms.meshDimention.value = newMeshDimention

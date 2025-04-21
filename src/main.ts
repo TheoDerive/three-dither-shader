@@ -6,8 +6,7 @@ import { LightManager } from "./material/lightManager";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
+  75, window.innerWidth / window.innerHeight,
   0.1,
   1000,
 );
@@ -22,7 +21,8 @@ const controls = new OrbitControls(camera, renderer.domElement);
 const ditherCube = new DitherMaterial()
 const ditherSphere = new DitherMaterial()
 const ditherPlane = new DitherMaterial()
-LightManager.addLight([0, 1, 1], 3)
+
+LightManager.addLight([0, 7, 1], .2)
 LightManager.setPixelRatio(200)
 
 const cube = new THREE.Mesh(
@@ -36,8 +36,8 @@ const sphere = new THREE.Mesh(
 )
 
 const plane = new THREE.Mesh(
-  new THREE.PlaneGeometry(1, 7),
-  ditherPlane.getMaterial(1, 7 )
+  new THREE.PlaneGeometry(3, 7),
+  ditherPlane.getMaterial(1, 2)
 )
 
 sphere.position.x += 3
@@ -56,13 +56,14 @@ function animate() {
   const elapsedTime = clock.getElapsedTime()
   controls.update();
 
-  cube.position.y = Math.sin(elapsedTime)
-  
-  // LightManager.updateLight(0, [
-  //   Math.sin(elapsedTime) * 4,
-  //   1,
-  //   1
-  // ], 1)
+  cube.position.y = Math.sin(elapsedTime) * 2
+
+  const { y } = cube.position
+  LightManager.updateLight(0, [
+    0,
+    y,
+    1
+  ], .5)
 
   renderer.render(scene, camera);
 }
