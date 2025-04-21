@@ -69,7 +69,7 @@ float attenuation = max(1.0 - lightDistance / (decayIntencity * 10.0), 0.0);
 
   float grey = dot(light.rgb, vec3(0.299, 0.587, 0.114));
 
-  float threshold = dither4x4(vPosition.xy, grey);
+  float threshold = dither4x4(vUv, grey);
   float dither = step(grey, threshold);
 
   vec3 ambiantLight = vec3(0.0, 0.3, .7) * .1;
