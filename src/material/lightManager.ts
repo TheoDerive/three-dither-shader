@@ -1,4 +1,4 @@
-import * as THREE from "three"
+import * as THREE from "three";
 
 export class LightManager {
   static maxLights = 100;
@@ -7,24 +7,23 @@ export class LightManager {
 
   private static lightTexture = new THREE.DataTexture(
     LightManager.lightData,
-    LightManager.lightCount,
+    this.maxLights,
     1,
     THREE.RGBAFormat,
-    THREE.FloatType
+    THREE.FloatType,
   );
 
   private static pixelRatio = 500;
 
-  private static materials: Set<THREE.ShaderMaterial> = new Set()
-
+  private static materials: Set<THREE.ShaderMaterial> = new Set();
 
   /**
-  * Create a new light
-  *
-  * @param { array } position - Light position: [ x, y, z ]
-  * @param { number } intensity - Light intencity
-  *
-  */
+   * Create a new light
+   *
+   * @param { array } position - Light position: [ x, y, z ]
+   * @param { number } intensity - Light intencity
+   *
+   */
   static addLight(position: [number, number, number], intensity: number) {
     if (this.lightCount >= this.maxLights) {
       console.warn("Max number of lights reached");
@@ -37,37 +36,43 @@ export class LightManager {
     this.lightData[i + 2] = position[2];
     this.lightData[i + 3] = intensity;
 
-    this.lightCount++
-    this.lightTexture.image.width = this.lightCount
-    this.lightTexture.needsUpdate = true
+    this.lightCount++;
+    this.lightTexture.minFilter = THREE.NearestFilter;
+    this.lightTexture.magFilter = THREE.NearestFilter;
+    this.lightTexture.wrapS = THREE.ClampToEdgeWrapping;
+    this.lightTexture.wrapT = THREE.ClampToEdgeWrapping;
+    this.lightTexture.needsUpdate = true;
 
-    this.updateUniforms()
+    this.updateUniforms();
   }
 
-  private static updateUniforms(){
-    this.materials.forEach(mat => {
-      mat.uniforms.lightTexture.value = this.lightTexture
-      mat.uniforms.numberOfLights.value = this.lightCount
-      mat.uniforms.pixelRatio.value = this.pixelRatio
-    })
+  private static updateUniforms() {
+    this.materials.forEach((mat) => {
+      mat.uniforms.lightTexture.value = this.lightTexture;
+      mat.uniforms.numberOfLights.value = this.lightCount;
+      mat.uniforms.pixelRatio.value = this.pixelRatio;
+    });
   }
 
   static registerMaterial(mat: THREE.ShaderMaterial) {
-    this.materials.add(mat)
-    mat.uniforms.lightTexture.value = this.lightTexture
-    mat.uniforms.numberOfLights.value = this.lightCount
+    this.materials.add(mat);
+    mat.uniforms.lightTexture.value = this.lightTexture;
+    mat.uniforms.numberOfLights.value = this.lightCount;
   }
 
-
   /**
-  * Upadate light values
-  *
-  * @param { number } index - Light index / id
-  * @param { array } position - Light position: [ x, y, z ]
-  * @param { number } intensity - Light intencity
-  *
-  */
-  static updateLight(index: number, position: [number, number, number], intensity: number) {
+   * Upadate light values
+   *
+   * @param { number } index - Light index / id
+   * @param { array } position - Light position: [ x, y, z ]
+   * @param { number } intensity - Light intencity
+   *
+   */
+  static updateLight(
+    index: number,
+    position: [number, number, number],
+    intensity: number,
+  ) {
     const base = index * 4;
 
     if (base + 3 >= this.lightData.length) {
@@ -82,22 +87,22 @@ export class LightManager {
 
     this.lightTexture.needsUpdate = true;
 
-    this.updateUniforms()
+    this.updateUniforms();
   }
 
-  static getPixelRatio(){
-    return this.pixelRatio
+  static getPixelRatio() {
+    return this.pixelRatio;
   }
 
   /**
-  * Upadate light pixelRatio
-  *
-  * @param { number } value - New pixelRatio value
-  *
-  */
-  static setPixelRatio(value: number){
-    this.pixelRatio = value
+   * Upadate light pixelRatio
+   *
+   * @param { number } value - New pixelRatio value
+   *
+   */
+  static setPixelRatio(value: number) {
+    this.pixelRatio = value;
 
-    this.updateUniforms()
+    this.updateUniforms();
   }
 }

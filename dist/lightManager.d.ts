@@ -7,30 +7,30 @@ export declare class LightManager {
     private static pixelRatio;
     private static materials;
     /**
-    * Create a new light
-    *
-    * @param { array } position - Light position: [ x, y, z ]
-    * @param { number } intensity - Light intencity
-    *
-    */
+     * Create a new light
+     *
+     * @param { array } position - Light position: [ x, y, z ]
+     * @param { number } intensity - Light intencity
+     *
+     */
     static addLight(position: [number, number, number], intensity: number): void;
     private static updateUniforms;
     static registerMaterial(mat: THREE.ShaderMaterial): void;
     /**
-    * Upadate light values
-    *
-    * @param { number } index - Light index / id
-    * @param { array } position - Light position: [ x, y, z ]
-    * @param { number } intensity - Light intencity
-    *
-    */
+     * Upadate light values
+     *
+     * @param { number } index - Light index / id
+     * @param { array } position - Light position: [ x, y, z ]
+     * @param { number } intensity - Light intencity
+     *
+     */
     static updateLight(index: number, position: [number, number, number], intensity: number): void;
     static getPixelRatio(): number;
     /**
-    * Upadate light pixelRatio
-    *
-    * @param { number } value - New pixelRatio value
-    *
-    */
+     * Upadate light pixelRatio
+     *
+     * @param { number } value - New pixelRatio value
+     *
+     */
     static setPixelRatio(value: number): void;
 }

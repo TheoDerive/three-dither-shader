@@ -62,16 +62,13 @@ float dither4x4(vec2 position, float brightness) {
 }
 
 void main(){
- float CENTER = 1.0 / float(numberOfLights);
-
   vec3 light = vec3(0);
-
 
   for ( int i = 0; i < numberOfLights; i++ ){
 
-    vec2 uv = vec2((float(i) + CENTER) / float(numberOfLights), CENTER);
-
-    vec4 lightData = texture(lightTexture, uv);
+float u = (float(i) + 0.5) / float(100.0);
+vec2 uv = vec2(u, 0.5);
+vec4 lightData = texture(lightTexture, uv);
 
 
     vec3 lightPosition = lightData.xyz;
@@ -85,19 +82,19 @@ void main(){
   vec3 lightDirection = normalize(lightDelta);
 
 
-float shading = dot(vNormal, lightDirection) * 0.5 + 0.5;
-shading = max(shading, 0.0);
+  float shading = dot(vNormal, lightDirection) * 0.5 + 0.5;
+  shading = max(shading, 0.0);
 
 
-  float decay = 1.0 - lightDistance * decayIntencity;
-  light += vec3(.8, .3, .8) * lightIntencity * shading * decay;
+float attenuation = max(1.0 - lightDistance / (decayIntencity * 10.0), 0.0);
+  light += vec3(.8, .3, .8) * lightIntencity * shading * attenuation;
   }
 
-light = clamp(light, 0.0, 1.0); 
+  light = clamp(light, 0.0, 1.0); 
 
   float grey = dot(light.rgb, vec3(0.299, 0.587, 0.114));
 
-  float threshold = dither4x4(vUv, grey);
+  float threshold = dither4x4(vPosition.xy, grey);
   float dither = step(grey, threshold);
 
   vec3 ambiantLight = vec3(0.0, 0.3, .7) * .1;
