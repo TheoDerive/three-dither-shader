@@ -23,6 +23,7 @@ const ditherSphere = new DitherMaterial()
 const ditherPlane = new DitherMaterial()
 
 LightManager.addLight([0, 7, 1], .2)
+LightManager.addLight([0, 2, 2], .2)
 LightManager.debugLight(scene)
 
 LightManager.setPixelRatio(200)

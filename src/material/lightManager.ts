@@ -128,10 +128,12 @@ export class LightManager {
    */
   static debugLight(scene: THREE.Scene) {
     for (let i = 0; i < this.lightCount; i++) {
+      const index = i * 4
+
       const position = {
-        x: this.lightData[i],
-        y: this.lightData[i + 1],
-        z: this.lightData[i + 2],
+        x: this.lightData[index],
+        y: this.lightData[index + 1],
+        z: this.lightData[index + 2],
       };
 
       const lightHelper = new THREE.Mesh(
