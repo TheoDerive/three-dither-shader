@@ -3,6 +3,7 @@ import * as THREE from "three";
 export class LightManager {
   static maxLights = 100;
   private static lightData = new Float32Array(LightManager.maxLights * 4);
+  private static lightDebug = [] as { index: number; mesh: THREE.Mesh }[];
   static lightCount = 0;
 
   private static lightTexture = new THREE.DataTexture(
@@ -88,6 +89,21 @@ export class LightManager {
     this.lightTexture.needsUpdate = true;
 
     this.updateUniforms();
+
+    if(this.lightDebug.length > 0){
+      this.updateDebugLight(
+        index,
+        new THREE.Vector3(position[0], position[1], position[2])
+      )
+    }
+  }
+
+  private static updateDebugLight(index: number, newPosition: THREE.Vector3) {
+    const light = this.lightDebug.find((l) => l.index === index);
+
+    if (!light) return;
+
+    light.mesh.position.copy(newPosition);
   }
 
   static getPixelRatio() {
@@ -104,5 +120,34 @@ export class LightManager {
     this.pixelRatio = value;
 
     this.updateUniforms();
+  }
+
+  /**
+   * Debug light
+   *
+   * @param { THREE.Scene } scene - The scene where you want the helper be render
+   */
+  static debugLight(scene: THREE.Scene) {
+    for (let i = 0; i < this.lightCount; i++) {
+      const position = {
+        x: this.lightData[i],
+        y: this.lightData[i + 1],
+        z: this.lightData[i + 2],
+      };
+
+      const lightHelper = new THREE.Mesh(
+        new THREE.SphereGeometry(0.2, 16, 16),
+        new THREE.MeshBasicMaterial(),
+      );
+
+      lightHelper.position.set(position.x, position.y, position.z);
+
+      scene.add(lightHelper);
+
+      this.lightDebug.push({
+        index: i,
+        mesh: lightHelper,
+      });
+    }
   }
 }
