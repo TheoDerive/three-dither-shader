@@ -37,7 +37,6 @@ float dither4x4(vec2 position, float brightness) {
 }
 
 void main(){
-
   vec3 light = vec3(0);
 
   for ( int i = 0; i < numberOfLights; i++ ){

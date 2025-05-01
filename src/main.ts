@@ -23,6 +23,8 @@ const ditherSphere = new DitherMaterial()
 const ditherPlane = new DitherMaterial()
 
 LightManager.addLight([0, 7, 1], .2)
+LightManager.debugLight(scene)
+
 LightManager.setPixelRatio(200)
 
 const cube = new THREE.Mesh(
@@ -62,7 +64,7 @@ function animate() {
   LightManager.updateLight(0, [
     0,
     y,
-    1
+    2
   ], .5)
 
   renderer.render(scene, camera);
